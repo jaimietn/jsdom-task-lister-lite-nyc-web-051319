@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   // your code here
-  console.log('LOAD THAT DOM')
+  console.log('LOAD DOM')
 
   const mainContent = document.querySelector("#main-content")
   console.log(mainContent)
@@ -10,9 +10,17 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault()
 
     const taskDescription = document.querySelector("#new-task-description").value
+    //Begin due date
     const dueDate = document.querySelector("#due-date").value
+    let y = " "
+    if (dueDate != "2019-06-26") {
+      y = "  (PAST DUE!!!) ".fontcolor("red");
+    }
+    //Bug: puts past due for items due in future
+    //End due date
     const li = document.createElement('li');
     const deleteButton = document.createElement('button');
+    //Begin priority
     const prioritySelection = document.querySelector("#priority-selection").value
     let x = 0
     if (prioritySelection === "high-priority"){
@@ -24,8 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (prioritySelection === "low-priority"){
       x = taskDescription.fontcolor("green");
     }
+    //End priority
+    //List display
     deleteButton.innerText = "X"
-    li.innerHTML = x + ": " + dueDate
+    li.innerHTML = x + ": " + dueDate + y
     li.appendChild(deleteButton);
     deleteButton.addEventListener('click', function(e){
       li.remove();
